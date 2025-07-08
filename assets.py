@@ -15,5 +15,5 @@ BLUE_TRAIL = pygame.transform.scale(pygame.image.load(os.path.join("sprites", "b
 RED_TRAIL = pygame.transform.scale(pygame.image.load(os.path.join("sprites", "red_las.png")), (50,25))
 
 #Background Image
-bg = pygame.transform.scale(pygame.image.load(os.path.join("bg", "bg.jpg")), (DISP_WIDTH, DISP_HEIGHT))
-menubg = pygame.transform.scale(pygame.image.load(os.path.join("bg", "menuBG.jpg")), (DISP_WIDTH, DISP_HEIGHT))
+BG = pygame.transform.scale(pygame.image.load(os.path.join("bg", "bg.jpg")), (DISP_WIDTH, DISP_HEIGHT))
+MENUBG = pygame.transform.scale(pygame.image.load(os.path.join("bg", "menuBG.jpg")), (DISP_WIDTH, DISP_HEIGHT))
