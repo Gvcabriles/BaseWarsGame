@@ -1,7 +1,7 @@
 import pygame
 import random
 from settings import DISP_WIDTH, DISP_HEIGHT, WHITE, GREEN, YELLOW, LIGHTGRAY, DARKGRAY, RED, FPS
-from assets import MENU_BG, BG
+from assets import MENUBG, BG
 from sounds import DEATH_AUDIO
 from player import Player
 from enemy import Droid
@@ -14,7 +14,7 @@ def instructions():
     myfont2 = pygame.font.Font("8-BIT WONDER.TTF", 50)
     running = True
     while running:
-        screen.blit(MENU_BG, (0, 0))
+        screen.blit(MENUBG, (0, 0))
         header_text = myfont2.render("Instructions", 1, YELLOW)
         body_texts = [
             "* Press the arrow keys to move the Trooper",
@@ -49,7 +49,7 @@ def mainmenu():
     myfont3 = pygame.font.Font("8-bit-hud.TTF", 20)
     running = True
     while running:
-        screen.blit(MENU_BG, (0, 0))
+        screen.blit(MENUBG, (0, 0))
         main_text = myfont2.render("Base Wars", 1, YELLOW)
         body_text = myfont.render("Defend the base from the Droids!", 1, DARKGRAY)
         instructions_text = myfont3.render("Press the >Right Shift< button for Instructions", 1, WHITE)

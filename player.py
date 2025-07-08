@@ -1,6 +1,7 @@
 from bullet import Trail
 from assets import TROOPER, BLUE_TRAIL
 from sounds import SHOOT_SOUND, HIT_SOUND, DROID_DEATH
+from settings import DISP_WIDTH
 import pygame
 
 class Trooper:
@@ -19,17 +20,20 @@ class Trooper:
         for t in self.trail:
             t.draw(screen)
 
-    def move_trail(self, tvel, obj):
+    # Replace the existing move_trail in Trooper class with this:
+    def move_trail(self, tvel, target):
         self.overheat()
-        for t in self.trail:
-            t.move(tvel)
-            if t.off_screen(1200):
-                self.trail.remove(t)
-            elif t.collision(obj):
-                obj.health -= 1
-                obj.hp -= 1
+        for trail in self.trail[:]:
+            trail.move(tvel)
+            if trail.off_screen(1200):
+                self.trail.remove(trail)
+            elif trail.collision(target):
+                target.health -= 1
+                if hasattr(target, 'hp'):
+                    target.hp -= 1
                 HIT_SOUND.play()
-                self.trail.remove(t)
+                self.trail.remove(trail)
+
 
     def get_width(self):
         return self.trooper_img.get_width()
@@ -86,4 +90,19 @@ class Player(Trooper):
         pygame.draw.rect(screen, (0, 255, 0), hp1bar)
         pygame.draw.rect(screen, colour, hp2bar)
         pygame.draw.rect(screen, (255, 255, 255), (10, 45, self.healthsize, 25), 4)
+
+    def move_trail(self, tvel, enemies):  # enemies = list
+        self.overheat()
+        for trail in self.trail[:]:
+            trail.move(tvel)
+            if trail.off_screen(1200):
+                self.trail.remove(trail)
+            else:
+                for enemy in enemies[:]:
+                    if trail.collision(enemy):
+                        enemies.remove(enemy)
+                        self.trail.remove(trail)
+                        DROID_DEATH.play()
+                        self.OVERHEAT = max(5, self.OVERHEAT - 0.5)
+                        break
 
